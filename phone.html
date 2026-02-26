@@ -1,0 +1,168 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>For Badmashua Sakshi 💖</title>
+<style>
+body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    text-align: center;
+    background: linear-gradient(135deg,#ff9ecf,#ffcce6);
+    overflow: hidden;
+}
+.container { padding: 40px 20px; }
+h1#question {
+    color: white;
+    font-size: 26px;
+    margin-top: 30px;
+    text-shadow: 2px 2px 5px #ff3399;
+}
+.buttons { margin-top: 40px; position: relative; height: 200px; width: 100%; }
+button {
+    padding: 15px 30px;
+    font-size: 18px;
+    border: none;
+    border-radius: 30px;
+    cursor: pointer;
+    margin: 10px;
+}
+#yes {
+    background-color: #ff3399;
+    color: white;
+    box-shadow: 0 0 15px #ff66b2;
+    animation: glow 1.5s infinite alternate;
+}
+@keyframes glow {
+    from { box-shadow: 0 0 10px #ff66b2; }
+    to { box-shadow: 0 0 25px #ff1493; }
+}
+#no { background-color: #444; color: white; position: absolute; }
+#character { font-size: 70px; margin-top: 20px; transition: transform 0.3s ease; }
+#bubble {
+    display: inline-block;
+    background: white;
+    padding: 10px 15px;
+    border-radius: 20px;
+    margin-top: 10px;
+    font-size: 14px;
+    color: #ff3399;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+}
+.bounce { animation: bounce 0.6s ease; }
+@keyframes bounce { 0%{transform:scale(1);}50%{transform:scale(1.2);}100%{transform:scale(1);} }
+.heart { position:absolute; font-size:20px; animation:float 5s linear infinite; }
+@keyframes float { 0%{transform:translateY(100vh);opacity:1;}100%{transform:translateY(-10vh);opacity:0;} }
+.anime-dance { width:200px; margin-top:20px; animation:popIn 1s ease; }
+@keyframes popIn { from{transform:scale(0);} to{transform:scale(1);} }
+</style>
+</head>
+<body>
+
+<!-- Music (replace URL with your hosted MP3) -->
+<audio id="bgMusic" preload="auto" loop>
+  <source src="https://your-server.com/duroon-duroon.mp3" type="audio/mpeg">
+</audio>
+
+<div class="container">
+    <div id="character">🥺</div>
+    <div id="bubble">Will you say yes? 💕</div>
+    <h1 id="question">Badmashua Sakshi 💕<br>Do you love me?</h1>
+    <div class="buttons">
+        <button id="yes">Yes ❤️</button>
+        <button id="no">No 😢</button>
+    </div>
+</div>
+
+<script>
+// QUESTIONS
+const questions = [
+"Badmashua Sakshi 💕<br>Do you love me?",
+"Are you my cute badmash forever? 😘",
+"Will you always stay by my side? 💖",
+"Do you promise to be mine forever? 💍",
+"Final question 😍<br>Will you be mine forever?"
+];
+
+let current = 0;
+const questionText = document.getElementById("question");
+const yesBtn = document.getElementById("yes");
+const noBtn = document.getElementById("no");
+const character = document.getElementById("character");
+const bubble = document.getElementById("bubble");
+const music = document.getElementById("bgMusic");
+
+// NO button initial position
+noBtn.style.left = "60%";
+noBtn.style.top = "60px";
+
+// Move NO button
+function moveNoButton() {
+    const rect = document.querySelector(".buttons").getBoundingClientRect();
+    const x = Math.random() * (rect.width - 100);
+    const y = Math.random() * (rect.height - 50);
+    noBtn.style.left = x + "px";
+    noBtn.style.top = y + "px";
+    character.innerHTML = "😜";
+    bubble.innerHTML = "Hehe you can't press No 😝";
+}
+noBtn.addEventListener("mouseover", moveNoButton);
+noBtn.addEventListener("touchstart", moveNoButton);
+noBtn.addEventListener("click", moveNoButton);
+
+// YES button click
+yesBtn.addEventListener("click", () => {
+    // PLAY MUSIC inside click (required for Android/iOS)
+    music.muted = false;
+    music.volume = 0.7;
+    music.play().catch(() => console.log("Audio blocked, tap again if needed"));
+
+    character.innerHTML = "😍";
+    const loveMessages = [
+        "You make my world pink 💕",
+        "My cute badmash 😘",
+        "I’m the luckiest person 🥹",
+        "Forever starts now 💖"
+    ];
+    bubble.innerHTML = loveMessages[Math.floor(Math.random() * loveMessages.length)];
+
+    character.classList.add("bounce");
+    setTimeout(() => character.classList.remove("bounce"), 600);
+
+    current++;
+    if(current < questions.length){
+        questionText.innerHTML = questions[current];
+    } else {
+        celebrate();
+    }
+});
+
+// CELEBRATION
+function celebrate() {
+    document.querySelector(".container").innerHTML = `
+        <div style="font-size:80px;">💍</div>
+        <img src="anime-dance.gif" class="anime-dance">
+        <h1 style="margin-top:20px; font-size:30px; color:white;">
+        BADMASHUA SAKSHI 😍<br>
+        Forever Mine 💖<br>
+        Manne Tharo Prem Chahije 💕
+        </h1>`;
+    setInterval(createHeart, 300);
+}
+
+// Floating hearts
+function createHeart() {
+    const heart = document.createElement("div");
+    heart.classList.add("heart");
+    heart.innerHTML = "💖";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.fontSize = (Math.random() * 20 + 15) + "px";
+    heart.style.animationDuration = (Math.random() * 3 + 2) + "s";
+    document.body.appendChild(heart);
+    setTimeout(() => heart.remove(), 5000);
+}
+</script>
+
+</body>
+</html>
